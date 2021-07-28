@@ -1,0 +1,40 @@
++--------+----------+---------------------------------+---------------------+-------------------------------------------------------------------------+--------------+
+| Domain | Method   | URI                             | Name                | Action                                                                  | Middleware   |
++--------+----------+---------------------------------+---------------------+-------------------------------------------------------------------------+--------------+
+|        | GET|HEAD | /                               |                     | Closure                                                                 | web          |
+|        | GET|HEAD | api/user                        |                     | Closure                                                                 | api          |
+|        |          |                                 |                     |                                                                         | auth:api     |
+|        | POST     | confirm-password                |                     | App\Http\Controllers\Auth\ConfirmablePasswordController@store           | web          |
+|        |          |                                 |                     |                                                                         | auth         |
+|        | GET|HEAD | confirm-password                | password.confirm    | App\Http\Controllers\Auth\ConfirmablePasswordController@show            | web          |
+|        |          |                                 |                     |                                                                         | auth         |
+|        | GET|HEAD | dashboard                       | dashboard           | Closure                                                                 | web          |
+|        |          |                                 |                     |                                                                         | auth         |
+|        | POST     | email/verification-notification | verification.send   | App\Http\Controllers\Auth\EmailVerificationNotificationController@store | web          |
+|        |          |                                 |                     |                                                                         | auth         |
+|        |          |                                 |                     |                                                                         | throttle:6,1 |
+|        | POST     | forgot-password                 | password.email      | App\Http\Controllers\Auth\PasswordResetLinkController@store             | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | GET|HEAD | forgot-password                 | password.request    | App\Http\Controllers\Auth\PasswordResetLinkController@create            | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | POST     | login                           |                     | App\Http\Controllers\Auth\AuthenticatedSessionController@store          | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | GET|HEAD | login                           | login               | App\Http\Controllers\Auth\AuthenticatedSessionController@create         | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | POST     | logout                          | logout              | App\Http\Controllers\Auth\AuthenticatedSessionController@destroy        | web          |
+|        |          |                                 |                     |                                                                         | auth         |
+|        | POST     | register                        |                     | App\Http\Controllers\Auth\RegisteredUserController@store                | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | GET|HEAD | register                        | register            | App\Http\Controllers\Auth\RegisteredUserController@create               | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | POST     | reset-password                  | password.update     | App\Http\Controllers\Auth\NewPasswordController@store                   | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | GET|HEAD | reset-password/{token}          | password.reset      | App\Http\Controllers\Auth\NewPasswordController@create                  | web          |
+|        |          |                                 |                     |                                                                         | guest        |
+|        | GET|HEAD | verify-email                    | verification.notice | App\Http\Controllers\Auth\EmailVerificationPromptController@__invoke    | web          |
+|        |          |                                 |                     |                                                                         | auth         |
+|        | GET|HEAD | verify-email/{id}/{hash}        | verification.verify | App\Http\Controllers\Auth\VerifyEmailController@__invoke                | web          |
+|        |          |                                 |                     |                                                                         | auth         |
+|        |          |                                 |                     |                                                                         | signed       |
+|        |          |                                 |                     |                                                                         | throttle:6,1 |
++--------+----------+---------------------------------+---------------------+-------------------------------------------------------------------------+--------------+
