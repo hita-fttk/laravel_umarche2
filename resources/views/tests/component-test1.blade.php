@@ -1,6 +1,7 @@
 <x-tests.app>
     <x-slot name="header">ヘッダー１</x-slot> 
-コンポーネントテスト１
+コンポーネントテスト1だえ～～
+<x-tests.card title="タイトル１" content="本文１" :message="$message" />
 </x-tests.app>
 
 
