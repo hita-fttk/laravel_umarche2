@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'users',
         'passwords' => 'users',
     ],
 
@@ -41,6 +41,20 @@ return [
             'provider' => 'users',
         ],
 
+        'users' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'oweners' => [
+            'driver' => 'session',
+            'provider' => 'oweners',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -70,6 +84,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'oweners' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Owener::class,
+        ],
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -96,6 +118,18 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'oweners' => [
+            'provider' => 'oweners',
+            'table' => 'owener_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admin' => [
+            'provider' => 'admin',
+            'table' => 'admin_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
