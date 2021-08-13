@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Owener; //Eloquent エロくアント
+use Illuminate\Support\Facades\DB; //QueryBuilder クエリービルダ
+use Carbon\Carbon;
+
 
 class owenersController extends Controller
 {
@@ -19,8 +23,22 @@ class owenersController extends Controller
      */
     public function index()
     {
+        $date_now = Carbon::now();
+        $date_parse = Carbon::parse(now());
+        echo $date_now->year;
+        echo $date_parse;
+
+        $e_all =  Owener::all();
+        $q_get = DB::table('oweners')->select('name','created_at')->get();
+        // $q_first = DB::table('oweners')->select('name')->first();
+
+        // $c_test = collect([
+        //     'name' => 'ｒうぇあと'
+        // ]);
+
         //
-        dd('o-na-itirann');
+        // dd($e_all, $q_get, );
+        return view('admin.oweners.index', compact('e_all','q_get'));
     }
 
     /**
