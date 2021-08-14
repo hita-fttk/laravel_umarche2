@@ -14,6 +14,7 @@
                     
                     <section class="text-gray-600 body-font">
   <div class="container px-5 mx-auto">
+      <x-flash-message status="info" />
       <div class="flex justify-end mb-4">
   <button onclick="location.href='{{ route('admin.oweners.create') }}'" class="flex ml-auto text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded">新規登録する</button>
       </div>

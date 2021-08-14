@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Owener; //Eloquent エロくアント
 use Illuminate\Support\Facades\DB; //QueryBuilder クエリービルダ
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class owenersController extends Controller
@@ -61,6 +63,23 @@ class owenersController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:admins',
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+        Owener::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+
+        return redirect()
+        ->route('admin.oweners.index')
+        ->with('message','オーナー登録を実施しました');
+
+        //$request->name;
         //
     }
 
