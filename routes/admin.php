@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\owenersController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::get('/', function () {
 
 Route::resource('oweners', owenersController::class)
 ->middleware('auth:admin');
+
+Route::prefix('expired-oweners')->
+middleware('auth:admin')->group(function(){
+    Route::get('index',[OwenersController::class,'expiredOwenerIndex'])->name('expired-oweners.index');
+    Route::post('destroy/{owener}',[OwenersController::class,'expiredOwenerDestroy'])->name('expired-oweners.destroy');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

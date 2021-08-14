@@ -77,7 +77,8 @@ class owenersController extends Controller
 
         return redirect()
         ->route('admin.oweners.index')
-        ->with('message','オーナー登録を実施しました');
+        ->with(['message'=>'オーナー登録を実施しました',
+    'status'=>'info']);
 
         //$request->name;
         //
@@ -125,7 +126,8 @@ class owenersController extends Controller
         $owener->save();
 
         return redirect()->route('admin.oweners.index')
-        ->with('message','オーナー情報を更新しました。');
+        ->with(['message'=>'オーナー情報を更新しました。',
+    'status' =>'info']);
     }
 
     /**
@@ -136,6 +138,19 @@ class owenersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd('削除処理');
+        Owener::FindOrFail($id)->delete();
+        return redirect()->route('admin.oweners.index')
+        ->with(['message' => 'オーナー情報を削除しました。',
+    'status' => 'alert']);
+    }
+    public function expiredOwenerIndex(){
+        $expiredOweners = Owener::onlyTrashed()->get();
+        return view('admin.expired-oweners',compact('expiredOweners'));
+    }
+
+    public function expiredOwenerDestroy($id){
+        Owener::onlyTrashed()->findOrFail($id)->forceDelete();
+        return redirect()->route('admin.expired-oweners.index');
     }
 }
