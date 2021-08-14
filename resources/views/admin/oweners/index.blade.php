@@ -26,7 +26,7 @@
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
-            <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
           </tr>
         </thead>
         <tbody>
@@ -35,8 +35,8 @@
             <td class="px-4 py-3">{{ $owener->name }}</td>
             <td class="px-4 py-3">{{ $owener->email }}</td>
             <td class="px-4 py-3">{{ $owener->created_at->diffForHumans() }}</td>
-            <td class="w-10 text-center">
-              <input name="plan" type="radio">
+            <td class="px-4 py-3">
+              <button onclick="location.href='{{ route('admin.oweners.edit',['owener' => $owener->id]) }}'" class="text-white bg-indigo-400 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ">編集する</button>
             </td>
           </tr>
           @endforeach

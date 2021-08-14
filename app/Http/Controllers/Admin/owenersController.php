@@ -40,7 +40,7 @@ class owenersController extends Controller
 
         //
         // dd($e_all, $q_get, );
-        $oweners = Owener::select('name','email','created_at')->get();
+        $oweners = Owener::select('id','name','email','created_at')->get();
         return view('admin.oweners.index', compact('oweners'));
     }
 
@@ -102,7 +102,11 @@ class owenersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owener = Owener::findOrFail($id);
+        // dd($owener);
+        return view('admin.oweners.edit',compact('owener'));
+
+        
     }
 
     /**
@@ -114,7 +118,14 @@ class owenersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $owener = Owener::FindOrFail($id);
+        $owener->name = $request->name;
+        $owener->email = $request->email;
+        $owener->password = Hash::make($request->password);
+        $owener->save();
+
+        return redirect()->route('admin.oweners.index')
+        ->with('message','オーナー情報を更新しました。');
     }
 
     /**
