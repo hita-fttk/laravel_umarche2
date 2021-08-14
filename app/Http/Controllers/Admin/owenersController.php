@@ -28,8 +28,8 @@ class owenersController extends Controller
         echo $date_now->year;
         echo $date_parse;
 
-        $e_all =  Owener::all();
-        $q_get = DB::table('oweners')->select('name','created_at')->get();
+        // $e_all =  Owener::all();
+        // $q_get = DB::table('oweners')->select('name','created_at')->get();
         // $q_first = DB::table('oweners')->select('name')->first();
 
         // $c_test = collect([
@@ -38,7 +38,8 @@ class owenersController extends Controller
 
         //
         // dd($e_all, $q_get, );
-        return view('admin.oweners.index', compact('e_all','q_get'));
+        $oweners = Owener::select('name','email','created_at')->get();
+        return view('admin.oweners.index', compact('oweners'));
     }
 
     /**
@@ -49,6 +50,7 @@ class owenersController extends Controller
     public function create()
     {
         //
+        return view('admin.oweners.create');
     }
 
     /**
