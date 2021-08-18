@@ -10,6 +10,14 @@ class Shop extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'owener_id',
+        'name',
+        'information',
+        'filename',
+        'is_selling'
+    ];
+
     public function owener()
     {
         return $this->belongsTo(Owener::class);
