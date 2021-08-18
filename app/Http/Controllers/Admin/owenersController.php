@@ -40,7 +40,8 @@ class owenersController extends Controller
 
         //
         // dd($e_all, $q_get, );
-        $oweners = Owener::select('id','name','email','created_at')->get();
+        $oweners = Owener::select('id','name','email','created_at')
+        ->paginate(3);
         return view('admin.oweners.index', compact('oweners'));
     }
 
