@@ -5,15 +5,20 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
+                    <div class="w-12">
                     <a href="{{ route('owener.dashboard') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
+                    </div>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('owener.dashboard')" :active="request()->routeIs('oerner.dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('owener.dashboard')" :active="request()->routeIs('owener.dashboard')">
+                        {{  __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('owener.shops.index')" :active="request()->routeIs('owener.shops.index')">
+                        店舗情報
                     </x-nav-link>
                 </div>
             </div>
@@ -64,7 +69,10 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('owener.dashboard')" :active="request()->routeIs('owener.dashboard')">
-                {{ __('Dashboard') }}
+                {{  __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('owener.shops.index')" :active="request()->routeIs('owener.shops.index')">
+                店舗情報
             </x-responsive-nav-link>
         </div>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Owener\Auth\NewPasswordController;
 use App\Http\Controllers\Owener\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Owener\Auth\RegisteredUserController;
 use App\Http\Controllers\Owener\Auth\VerifyEmailController;
+use App\Http\Controllers\Owener\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,13 @@ use App\Http\Controllers\Owener\Auth\VerifyEmailController;
 
 Route::get('/', function () {
     return view('owener.welcome');
+});
+
+Route::prefix('shops')->
+middleware('auth:oweners')->group(function(){
+    Route::get('index',[ShopController::class,'index'])->name('shops.index');
+    Route::get('edit/{shop}',[ShopController::class,'edit'])->name('shops.edit');
+    Route::post('update/{shop}', [ShopController::class,'update'])->name('shops.update');
 });
 
 Route::get('/dashboard', function () {
