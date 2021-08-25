@@ -25,7 +25,7 @@
                         @if(empty($shop->filename))
                         <img src="{{asset('storage/images/no_image.jpg')}}">
                         @else
-                        <img src="{{ asset('storage/shops/' . $shop->filename) }}" >
+                        <img src="{{ asset('public/storage/images/'.$shop->filename) }}" >
                         @endif
                     </div>
                     </div>
