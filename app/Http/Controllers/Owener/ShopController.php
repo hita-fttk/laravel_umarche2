@@ -15,7 +15,7 @@ class ShopController extends Controller
 
         $this->middleware(function ($request, $next) {
             // dd($request->route()->parameter('shop')); //文字列
-            dd(Auth::id()); //数値
+            // dd(Auth::id()); //数値
 
             $id = $request->route()->parameter('shop');
             if(!is_null($id)){
@@ -38,7 +38,7 @@ class ShopController extends Controller
     }
     public function edit($id)
     {
-        // dd(Shop::findOrFail($id));
+        dd(Shop::findOrFail($id));
     }
     public function update(Request $request, $id)
     {
