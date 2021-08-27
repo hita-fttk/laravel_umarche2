@@ -10,6 +10,7 @@ use App\Http\Controllers\Owener\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Owener\Auth\RegisteredUserController;
 use App\Http\Controllers\Owener\Auth\VerifyEmailController;
 use App\Http\Controllers\Owener\ShopController;
+use App\Http\Controllers\Owener\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ middleware('auth:oweners')->group(function(){
     Route::get('edit/{shop}',[ShopController::class,'edit'])->name('shops.edit');
     Route::post('update/{shop}', [ShopController::class,'update'])->name('shops.update');
 });
+
+Route::resource('images', ImageController::class)
+->middleware('auth:oweners')->except(['show']);
 
 Route::get('/dashboard', function () {
     return view('owener.dashboard');
