@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             OwenerSeeder::class,
             ShopSeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }
