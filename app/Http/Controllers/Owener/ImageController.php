@@ -4,9 +4,30 @@ namespace App\Http\Controllers\Owener;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Image;
+use Illuminate\Support\Facades\Auth;
+
 
 class ImageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:oweners');
+
+        $this->middleware(function ($request, $next) {
+
+            $id = $request->route()->parameter('image');
+            if(!is_null($id)){
+                $imagesOwenerId = Image::findOrFail($id)->owener->id;
+                $imageId = (int)$imagesOwenerId;
+                $owenerId = Auth::id();
+                if($imageId !== $owenerId){
+                    abort(404);
+                }
+            }
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +35,13 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        // phpinfo();
+        $owenerId = Auth::id();
+        $images = Image::where('owener_id', $owenerId)
+        ->orderBy('updated_at', 'desc')
+        ->paginate(20);
+
+        return view('owener.images.index',compact('images'));
     }
 
     /**
