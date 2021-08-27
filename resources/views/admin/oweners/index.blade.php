@@ -45,6 +45,7 @@
             <td class="px-4 py-3">
               <a href="#" data-id="{{ $owener->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">削除する</a>
             </td>
+            </form>
           </tr>
           @endforeach
 
