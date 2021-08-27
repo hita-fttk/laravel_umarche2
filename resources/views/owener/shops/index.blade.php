@@ -14,6 +14,7 @@
                     <a href="{{ route('owener.shops.edit',['shop' => $shop->id ]) }}">
                     <div class="border rounded-md p-4">    
                         <div class="mb-4">
+                        <x-flash-message status="session.('status')" />
                             @if($shop->is_selling)
                             <span class="border p-2 rounded-md bg-blue-400 text-white">販売中</span>
                                 @else
@@ -21,13 +22,7 @@
                                 @endif
                         </div>
                     <div class="text-xl"> {{ $shop->name }}</div>
-                    <div>
-                        @if(empty($shop->filename))
-                        <img src="{{asset('storage/images/no_image.jpg')}}">
-                        @else
-                        <img src="{{ asset('public/storage/images/'.$shop->filename) }}" >
-                        @endif
-                    </div>
+                    <x-shop-thumbnail :filename="$shop->filename" />
                     </div>
                     </a>
                     </div>
