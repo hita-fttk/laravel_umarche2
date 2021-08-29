@@ -38,7 +38,7 @@ middleware('auth:oweners')->group(function(){
 Route::resource('images', ImageController::class)
 ->middleware('auth:oweners')->except(['show']);
 
-Route::resource('produces', ProductController::class)
+Route::resource('products', ProductController::class)
 ->middleware('auth:oweners')->except(['show']);
 
 Route::get('/dashboard', function () {

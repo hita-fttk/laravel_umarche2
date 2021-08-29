@@ -23,6 +23,9 @@
                     <x-nav-link :href="route('owener.images.index')" :active="request()->routeIs('owener.images.index')">
                         画像管理
                     </x-nav-link>
+                    <x-nav-link :href="route('owener.products.index')" :active="request()->routeIs('owener.products.index')">
+                        商品管理
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -79,6 +82,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('owener.images.index')" :active="request()->routeIs('owener.images.index')">
                 画像管理
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('owener.products.index')" :active="request()->routeIs('owener.products.index')">
+                商品管理
             </x-responsive-nav-link>
         </div>
 
