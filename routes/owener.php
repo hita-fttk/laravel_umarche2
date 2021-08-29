@@ -11,6 +11,7 @@ use App\Http\Controllers\Owener\Auth\RegisteredUserController;
 use App\Http\Controllers\Owener\Auth\VerifyEmailController;
 use App\Http\Controllers\Owener\ShopController;
 use App\Http\Controllers\Owener\ImageController;
+use App\Http\Controllers\Owener\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ middleware('auth:oweners')->group(function(){
 });
 
 Route::resource('images', ImageController::class)
+->middleware('auth:oweners')->except(['show']);
+
+Route::resource('produces', ProductController::class)
 ->middleware('auth:oweners')->except(['show']);
 
 Route::get('/dashboard', function () {
