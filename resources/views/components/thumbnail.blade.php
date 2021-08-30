@@ -5,7 +5,7 @@ if($type === 'shops' )
 }
 if($type === 'products' )
 {
-    $path = 'storage/product/';
+    $path = 'storage/products/';
 }
 
 @endphp
