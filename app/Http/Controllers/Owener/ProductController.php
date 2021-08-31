@@ -216,6 +216,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Product::FindOrFail($id)->delete();
+        return redirect()->route('owener.products.index')
+        ->with(['message' => '商品を削除しました。',
+                'status' => 'alert']);
     }
+    
 }
