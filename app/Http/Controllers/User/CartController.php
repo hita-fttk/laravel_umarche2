@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
+use Stripe;
 
 class CartController extends Controller
 {   
@@ -83,19 +84,28 @@ class CartController extends Controller
                     'quantity' => $product->pivot->quantity * -1,
                 ]);
         }
-        dd('test');
+        // dd('test');
+
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [$lineItems],
             'mode' => 'payment',
-            'success_url' => route('user.items.index'),
+            'success_url' => route('user.cart.success'),
             'cancel_url' => route('user.cart.index'),
         ]);
 
         $publicKey = env('STRIPE_PUBLIC_KEY');
 
         return view('user.checkout',compact('session','publicKey'));
+
+        // return redirect($session->url,303);
+    }
+    public function success()
+    {
+        Cart::where('user_id',Auth::id())->delete();
+
+        return redirect()->route('user.items.index');
     }
 }
