@@ -10,6 +10,7 @@ use App\Models\Image;
 use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Monolog\Handler\IFTTTHandler;
 
 class Product extends Model
 {
@@ -102,6 +103,15 @@ class Product extends Model
         }
         if($sortOrder === null || $sortOrder === \Constant::SORT_ORDER['older']){
             return $query->orderBy('products.created_at','asc');
+        }
+    }
+
+    public function scopeSelectCategory($query,$categoryId)
+    {
+        if($categoryId !== '0'){
+            return $query->where('secondary_category_id',$categoryId);
+        }else{
+            return ;
         }
     }
 
